@@ -1,2 +1,2 @@
 // @demo
-// basic:12 callback:12 disabled:12 flex:12 icon:12 textarea:12
+// basic:24 default:24 callback:24 disabled:24 flex:24 icon:24 textarea:24
