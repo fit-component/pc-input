@@ -76,7 +76,8 @@ export default class Input extends React.Component {
         let childs = (
             <input type="text"
                    id="j-input"
-                   value={this.props.value||this.props.defaultValue}
+                   value={this.props.value}
+                   defaultValue={this.props.defaultValue}
                    className="form-control input"
                    onFocus={this.handleFocus.bind(this)}
                    onBlur={this.handleBlur.bind(this)}
@@ -91,7 +92,8 @@ export default class Input extends React.Component {
             childs = (
                 <textarea
                     id="j-input"
-                    value={this.props.value||this.props.defaultValue}
+                    value={this.props.value}
+                    defaultValue={this.props.defaultValue}
                     className="form-control input"
                     onFocus={this.handleFocus.bind(this)}
                     onBlur={this.handleBlur.bind(this)}
@@ -117,7 +119,8 @@ export default class Input extends React.Component {
         let flexChild = (
             <textarea id="j-flex-textarea"
                       className={flexTextareaClass}
-                      value={this.props.value||this.props.defaultValue}
+                      value={this.props.value}
+                      defaultValue={this.props.defaultValue}
                       onFocus={this.handleFlexTextareaFocus.bind(this)}
                       onBlur={this.handleFlexTextareaBlur.bind(this)}
                       onChange={this.handleChange.bind(this)}
