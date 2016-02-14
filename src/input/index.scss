@@ -9,6 +9,7 @@
 }
 
 .input {
+  height: 34px;
   transition: border linear .2s, box-shadow linear .2s;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   border-radius: 0;
@@ -60,4 +61,8 @@
   &:focus {
     z-index: 4;
   }
+}
+
+.form-control-label {
+  padding: 0;
 }
