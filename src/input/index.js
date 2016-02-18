@@ -85,6 +85,7 @@ export default class Input extends React.Component {
                    onKeyDown={this.handleKeyDown.bind(this)}
                    disabled={this.props.disabled}
                    placeholder={this.props.placeholder}
+                   autoComplete={this.props.autocomplete?'on':'off'}
                    style={mergedInputStyle}/>
         )
 
@@ -95,6 +96,7 @@ export default class Input extends React.Component {
                     value={this.props.value}
                     defaultValue={this.props.defaultValue}
                     className="form-control input"
+                    autoComplete={this.props.autocomplete?'on':'off'}
                     onFocus={this.handleFocus.bind(this)}
                     onBlur={this.handleBlur.bind(this)}
                     onChange={this.handleChange.bind(this)}
@@ -123,6 +125,7 @@ export default class Input extends React.Component {
                       defaultValue={this.props.defaultValue}
                       onFocus={this.handleFlexTextareaFocus.bind(this)}
                       onBlur={this.handleFlexTextareaBlur.bind(this)}
+                      autoComplete={this.props.autocomplete?'on':'off'}
                       onChange={this.handleChange.bind(this)}
                       onKeyDown={this.handleKeyDown.bind(this)}
                       disabled={this.props.disabled}
@@ -187,24 +190,54 @@ export default class Input extends React.Component {
 
 Input.defaultProps = {
     style: {},
+
     styles: {
         input: {}
     },
+
+    // @desc 输入内容的回调
     onChange: ()=> {
     },
+
+    // @desc 获取焦点的回调
     onFocus: ()=> {
     },
+
+    // @desc 取消焦点的回调
     onBlur: ()=> {
     },
+
+    // @desc 按下按键的回调
     onKeyDown: ()=> {
     },
+
+    // @desc 是否禁用
     disabled: false,
+
+    // @desc 宽度
     width: null,
+
+    // @desc 占位文字
     placeholder: '',
+
+    // @desc 是否为 textarea
     textarea: false,
+
+    // @desc 是否允许拖拽大小
     resize: false,
+
+    // @desc 自动缩放宽度
     flexWidth: null,
+
+    // #desc 自动缩放高度
     flexHeight: null,
+
+    // @desc 输入框后面的小图标
     icon: null,
-    inputEndRender: null
+
+    // @desc 输入框尾部后追加内容
+    inputEndRender: null,
+
+    // @desc 是否允许自动填充
+    autocomplete: true
 }
