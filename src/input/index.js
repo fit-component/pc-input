@@ -9,7 +9,8 @@ export default class Input extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            showFlexTextarea: false
+            showFlexTextarea: false,
+            value: this.props.value
         }
     }
 
@@ -47,10 +48,21 @@ export default class Input extends React.Component {
 
     handleChange(event) {
         this.props.onChange(event.target.value, event)
+        let value = event.target.value;
+
+        this.setState({
+            value: value
+        })
     }
 
     handleKeyDown(event) {
         this.props.onKeyDown(event)
+    }
+
+    clear () {
+        this.setState({
+            value: ''
+        })
     }
 
     render() {
@@ -76,7 +88,7 @@ export default class Input extends React.Component {
         let childs = (
             <input type="text"
                    id="j-input"
-                   value={this.props.value}
+                   value={this.state.value}
                    defaultValue={this.props.defaultValue}
                    className="form-control input"
                    onFocus={this.handleFocus.bind(this)}
@@ -93,7 +105,7 @@ export default class Input extends React.Component {
             childs = (
                 <textarea
                     id="j-input"
-                    value={this.props.value}
+                    value={this.state.value}
                     defaultValue={this.props.defaultValue}
                     className="form-control input"
                     autoComplete={this.props.autocomplete?'on':'off'}
@@ -121,7 +133,7 @@ export default class Input extends React.Component {
         let flexChild = (
             <textarea id="j-flex-textarea"
                       className={flexTextareaClass}
-                      value={this.props.value}
+                      value={this.state.value}
                       defaultValue={this.props.defaultValue}
                       onFocus={this.handleFlexTextareaFocus.bind(this)}
                       onBlur={this.handleFlexTextareaBlur.bind(this)}
