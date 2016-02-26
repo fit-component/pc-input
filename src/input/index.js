@@ -10,7 +10,8 @@ export default class Input extends React.Component {
         super(props)
         this.state = {
             showFlexTextarea: false,
-            value: this.props.value
+            value: this.props.value,
+            icon: this.props.icon
         }
     }
 
@@ -22,6 +23,12 @@ export default class Input extends React.Component {
                 this.$dom.find('#j-flex-textarea').show()
             })
         }
+    }
+
+    componentWillReceiveProps (nextProps) {
+        this.setState({
+            value: nextProps.value
+        })
     }
 
     handleFocus(event) {
@@ -59,6 +66,18 @@ export default class Input extends React.Component {
         this.props.onKeyDown(event)
     }
 
+    handleIconMouseEnter (event) {
+        this.setState({
+            icon: 'times'
+        })
+    }
+
+    handleIconMouseLeave () {
+        this.setState({
+            icon: this.props.icon
+        })
+    }
+
     clear () {
         this.setState({
             value: ''
@@ -81,7 +100,7 @@ export default class Input extends React.Component {
 
         let iconClass = classNames({
             'fa': true,
-            ['fa-' + this.props.icon]: true,
+            ['fa-' + this.state.icon]: true,
             'icon': true
         })
 
@@ -152,7 +171,7 @@ export default class Input extends React.Component {
                            className="form-control-label">{this.props.label}</label>
                     <div style={{position:'relative'}}>
                         {childs}
-                        {this.props.icon ? <i className={iconClass}/> : null}
+                        {this.state.icon ? <i className={iconClass}/> : null}
                         {this.props.flexHeight || this.props.flexWidth ?
                             flexChild : null
                         }
@@ -171,7 +190,7 @@ export default class Input extends React.Component {
                                 <div className="input-group-addon">{this.props.addonLeft}</div>}
                             <div style={{position:'relative'}}>
                                 {childs}
-                                {this.props.icon ? <i className={iconClass}/> : null}
+                                {this.state.icon ? <i className={iconClass}/> : null}
                                 {this.props.flexHeight || this.props.flexWidth ?
                                     flexChild : null
                                 }
@@ -192,8 +211,8 @@ export default class Input extends React.Component {
                 {(this.props.flexHeight || this.props.flexWidth) && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ?
                     flexChild : null
                 }
-                {this.props.icon && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ?
-                    <i className={iconClass}/> : null}
+                {this.state.icon && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ?
+                    <i onMouseEnter={this.handleIconMouseEnter.bind(this)} onClick={this.props.handleIconClick}  onMouseLeave={this.handleIconMouseLeave.bind(this)} className={iconClass}/> : null}
                 {this.props.inputEndRender && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ? this.props.inputEndRender() : null}
             </div>
         )
