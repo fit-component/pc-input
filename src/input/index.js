@@ -25,7 +25,7 @@ export default class Input extends React.Component {
         }
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({
             value: nextProps.value
         })
@@ -66,19 +66,19 @@ export default class Input extends React.Component {
         this.props.onKeyDown(event)
     }
 
-    handleIconMouseEnter (event) {
+    handleIconMouseEnter(event) {
         this.setState({
             icon: 'times'
         })
     }
 
-    handleIconMouseLeave () {
+    handleIconMouseLeave() {
         this.setState({
             icon: this.props.icon
         })
     }
 
-    clear () {
+    clear() {
         this.setState({
             value: ''
         })
@@ -168,7 +168,7 @@ export default class Input extends React.Component {
             childs = (
                 <div className="form-container">
                     <label style={{width:this.props.labelWidth||null}}
-                           className="form-control-label">{this.props.label}</label>
+                           className="input-label">{this.props.label}</label>
                     <div style={{position:'relative'}}>
                         {childs}
                         {this.state.icon ? <i className={iconClass}/> : null}
@@ -212,7 +212,10 @@ export default class Input extends React.Component {
                     flexChild : null
                 }
                 {this.state.icon && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ?
-                    <i onMouseEnter={this.handleIconMouseEnter.bind(this)} onClick={this.props.handleIconClick}  onMouseLeave={this.handleIconMouseLeave.bind(this)} className={iconClass}/> : null}
+                    <i onMouseEnter={this.handleIconMouseEnter.bind(this)}
+                       onClick={this.props.handleIconClick}
+                       onMouseLeave={this.handleIconMouseLeave.bind(this)}
+                       className={iconClass}/> : null}
                 {this.props.inputEndRender && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ? this.props.inputEndRender() : null}
             </div>
         )
