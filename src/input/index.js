@@ -85,12 +85,19 @@ export default class Input extends React.Component {
     }
 
     render() {
+        const {className, resize, width, height, ...others} = this.props
+        const classes = classNames({
+            '_namespace': true,
+            [className]: className
+        })
+
         let textStyle = {
-            height: this.props.height,
-            resize: this.props.resize ? null : 'none'
+            height: height,
+            resize: resize ? null : 'none'
         }
-        if (this.props.width) {
-            textStyle.width = this.props.width
+
+        if (width) {
+            textStyle.width = width
         } else {
             textStyle.flexGrow = 1
         }
@@ -139,7 +146,7 @@ export default class Input extends React.Component {
         }
 
         let flexTextareaStyle = {
-            width: this.state.showFlexTextarea ? this.props.flexWidth || this.props.width || this.$dom && this.$dom.find('#j-input').outerWidth() || 200 : this.$dom && this.$dom.find('#j-input').outerWidth(),
+            width: this.state.showFlexTextarea ? this.props.flexWidth || width || this.$dom && this.$dom.find('#j-input').outerWidth() || 200 : this.$dom && this.$dom.find('#j-input').outerWidth(),
             height: this.state.showFlexTextarea ? this.props.flexHeight || 120 : this.$dom && this.$dom.find('#j-input').outerHeight() || 0
         }
 
@@ -206,7 +213,7 @@ export default class Input extends React.Component {
 
         return (
             <div style={mergedStyle}
-                 className="_namespace">
+                 className={classes}>
                 {childs}
                 {(this.props.flexHeight || this.props.flexWidth) && _.isEmpty(this.props.label) && _.isEmpty(this.props.addonLeft) && _.isEmpty(this.props.addonRight) ?
                     flexChild : null
