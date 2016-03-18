@@ -59,6 +59,9 @@
 
 .lib-pc-input-lib-input .flex-textarea {
   position: absolute;
+  border-color: #cfdadd;
+  padding: .4rem .75rem;
+  outline: none;
   left: 0;
   top: 0;
   z-index: 3;
