@@ -151,7 +151,6 @@ export default class Input extends React.Component {
         }
 
         let flexTextareaClass = classNames({
-            'form-control': true,
             'flex-textarea': true,
             'input': true
         })
