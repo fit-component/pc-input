@@ -98,9 +98,7 @@ export default class Input extends React.Component {
 
         if (width) {
             textStyle.width = width
-        } else {
-            textStyle.flexGrow = 1
-        }
+        } 
 
         let mergedInputStyle = Object.assign(_.cloneDeep(this.props.styles.input), textStyle)
         let mergedStyle = Object.assign(_.cloneDeep(this.props.style), textStyle)
