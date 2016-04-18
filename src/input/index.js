@@ -10,8 +10,8 @@ export default class Input extends React.Component {
         super(props)
         this.state = {
             showFlexTextarea: false,
-            value: this.props.value,
-            icon: this.props.icon
+            value           : this.props.value,
+            icon            : this.props.icon
         }
     }
 
@@ -88,7 +88,7 @@ export default class Input extends React.Component {
         const {className, resize, width, height, ...others} = this.props
         const classes = classNames({
             '_namespace': true,
-            [className]: className
+            [className] : className
         })
 
         let textStyle = {
@@ -98,59 +98,52 @@ export default class Input extends React.Component {
 
         if (width) {
             textStyle.width = width
-        } 
+        }
 
         let mergedInputStyle = Object.assign(_.cloneDeep(this.props.styles.input), textStyle)
         let mergedStyle = Object.assign(_.cloneDeep(this.props.style), textStyle)
 
         let iconClass = classNames({
-            'fa': true,
+            'fa'                     : true,
             ['fa-' + this.state.icon]: true,
-            'icon': true
+            'icon'                   : true
         })
 
-        let childs = (
-            <input type="text"
-                   id="j-input"
-                   value={this.state.value}
-                   defaultValue={this.props.defaultValue}
-                   className="form-control input"
-                   onFocus={this.handleFocus.bind(this)}
-                   onBlur={this.handleBlur.bind(this)}
-                   onChange={this.handleChange.bind(this)}
-                   onKeyDown={this.handleKeyDown.bind(this)}
-                   disabled={this.props.disabled}
-                   placeholder={this.props.placeholder}
-                   autoComplete={this.props.autocomplete?'on':'off'}
-                   style={mergedInputStyle}/>
-        )
+        let inputProps = {
+            type        : 'text',
+            id          : 'j-input',
+            value       : this.state.value,
+            defaultValue: this.props.defaultValue,
+            className   : 'form-control input',
+            onFocus     : this.handleFocus.bind(this),
+            onBlur      : this.handleBlur.bind(this),
+            onChange    : this.handleChange.bind(this),
+            onKeyDown   : this.handleKeyDown.bind(this),
+            disabled    : this.props.disabled,
+            placeholder : this.props.placeholder,
+            autoComplete: this.props.autocomplete ? 'on' : 'off',
+            style       : mergedInputStyle
+        }
+
+        // 如果有 defaultValue, 就把 value 删除
+        if (inputProps.defaultValue){
+            delete inputProps.value
+        }
+
+        let childs = React.createElement('input', inputProps)
 
         if (this.props.textarea) {
-            childs = (
-                <textarea
-                    id="j-input"
-                    value={this.state.value}
-                    defaultValue={this.props.defaultValue}
-                    className="form-control input"
-                    autoComplete={this.props.autocomplete?'on':'off'}
-                    onFocus={this.handleFocus.bind(this)}
-                    onBlur={this.handleBlur.bind(this)}
-                    onChange={this.handleChange.bind(this)}
-                    onKeyDown={this.handleKeyDown.bind(this)}
-                    disabled={this.props.disabled}
-                    placeholder={this.props.placeholder}
-                    style={mergedInputStyle}/>
-            )
+            childs = React.createElement('textarea', inputProps)
         }
 
         let flexTextareaStyle = {
-            width: this.state.showFlexTextarea ? this.props.flexWidth || width || this.$dom && this.$dom.find('#j-input').outerWidth() || 200 : this.$dom && this.$dom.find('#j-input').outerWidth(),
+            width : this.state.showFlexTextarea ? this.props.flexWidth || width || this.$dom && this.$dom.find('#j-input').outerWidth() || 200 : this.$dom && this.$dom.find('#j-input').outerWidth(),
             height: this.state.showFlexTextarea ? this.props.flexHeight || 120 : this.$dom && this.$dom.find('#j-input').outerHeight() || 0
         }
 
         let flexTextareaClass = classNames({
             'flex-textarea': true,
-            'input': true
+            'input'        : true
         })
 
         let flexChild = (
@@ -277,5 +270,8 @@ Input.defaultProps = {
     inputEndRender: null,
 
     // @desc 是否允许自动填充
-    autocomplete: true
+    autocomplete: true,
+
+    // @desc 输入框内容
+    value: ''
 }

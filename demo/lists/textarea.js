@@ -5,7 +5,7 @@ export default class Demo extends React.Component {
     render() {
         return (
             <Input textarea
-                   width="150"/>
+                   width={150}/>
         )
     }
 }

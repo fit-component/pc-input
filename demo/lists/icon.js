@@ -6,7 +6,7 @@ export default class Demo extends React.Component {
         return (
             <div>
                 <Input icon="search"
-                       width="150"/>
+                       width={150}/>
                 <Input label="姓名"
                        labelWidth={60}
                        icon="search"
