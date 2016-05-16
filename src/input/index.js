@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import _ from 'lodash'
 import $ from 'jquery'
 import './index.scss'
+import './button-group.scss'
 
 export default class Input extends React.Component {
     constructor(props) {
@@ -126,7 +127,7 @@ export default class Input extends React.Component {
         }
 
         // 如果有 defaultValue, 就把 value 删除
-        if (inputProps.defaultValue){
+        if (inputProps.defaultValue) {
             delete inputProps.value
         }
 

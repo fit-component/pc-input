@@ -1,6 +1,12 @@
+@import "../../../../../style/reset";
+
 & {
-    display: flex;
+    @include reset;
     position: relative;
+    display: flex;
+    input {
+        flex-grow: 1;
+    }
 }
 
 .form-control {
@@ -34,6 +40,7 @@
     position: absolute;
     right: 10px;
     top: 10px;
+    color: #666;
     z-index: 4;
 }
 
