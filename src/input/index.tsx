@@ -14,6 +14,8 @@ export default class Input extends React.Component<module.PropsInterface, module
     }
 
     handleInputChange(event: any) {
+        this.props['onChange'] && this.props['onChange'](event)
+
         const validateResult = this.props.validateMiddleware(event.target.value, validator)
         this.setState({
             hasError: !validateResult.ok,
