@@ -5,13 +5,12 @@ export default class Demo extends React.Component <any,any> {
     render() {
         return (
             <div>
-                <Input width={150}/>
-                <Input label="姓名"
-                       labelWidth={60}
-                       style={{marginTop:10}}/>
-                <Input addonLeft="高度"
-                       addonRight="%"
-                       style={{marginTop:10}}/>
+                <Input/>
+                <Input label="自定义提示文字"/>
+                <Input label="含有占位提示"
+                       placeholder="请使用真实姓名"/>
+                <Input label="自定义宽度"
+                       style={{width:500}}/>
             </div>
         )
     }

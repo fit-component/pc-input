@@ -1,25 +1,44 @@
 @import "../../../../../style/reset";
+@import "../../../../../style/color";
+@import "../../../../../style/placeholder";
 
 & {
     @include reset;
     position: relative;
+    margin-top: 20px;
+    background: white;
 }
 
 .input {
-    font-size: 18px;
+    font-size: 14px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: 300px;
+    width: 100%;
     border: none;
-    border-bottom: 1px solid #757575;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+    color: #333;
+    &.center {
+        text-align: center;
+    }
     &:focus {
         outline: none;
     }
+    &:disabled {
+        border-bottom: 1px dotted #ccc;
+    }
+    @include placeholder('&:not(:focus)') {
+        transition: opacify .3s;
+        opacity: 0;
+    }
+    @include placeholder('&:not(:focus).no-label') {
+        opacity: 1;
+    }
 }
 
-.placeholder {
+.label {
     color: #999;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
@@ -28,38 +47,58 @@
     transition: 0.2s ease all;
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
+    &.center {
+        width: 100%;
+        text-align: center;
+    }
+    .label-error {
+        color: $error-color;
+        margin-left: 10px;
+    }
 }
 
-.input:focus ~ .placeholder, .input:valid ~ .placeholder {
-    top: -20px;
-    font-size: 14px;
-    color: #5264AE;
+.input:focus ~ .label, .input:valid ~ .label {
+    top: -10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $primary-color;
+}
+
+// 内容合法,但没聚焦,label用淡黑色
+.input:valid:not(:focus) ~ .label {
+    color: #999;
 }
 
 .bottom-bar {
     position: relative;
     display: block;
-    width: 300px;
+    width: 100%;
     &:before, &:after {
         content: '';
         height: 2px;
         width: 0;
-        bottom: 1px;
+        bottom: 0;
         position: absolute;
-        background: #5264AE;
+        background: $primary-color;
         transition: 0.2s ease all;
         -moz-transition: 0.2s ease all;
         -webkit-transition: 0.2s ease all;
     }
-    .&:before {
+    &:before {
         left: 50%;
     }
-    .&:after {
+    &:after {
         right: 50%;
+    }
+    &.bottom-bar-error {
+        &:before, &:after {
+            width: 50%;
+            background: $error-color;
+        }
     }
 }
 
-.input:focus ~ .button-bar:before, .input:focus ~ .button-bar:after {
+.input:focus ~ .bottom-bar:before, .input:focus ~ .bottom-bar:after {
     width: 50%;
 }
 
@@ -77,6 +116,17 @@
     -webkit-animation: inputHighlighter 0.3s ease;
     -moz-animation: inputHighlighter 0.3s ease;
     animation: inputHighlighter 0.3s ease;
+}
+
+// 右侧可以添加内容
+.right-addon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @-webkit-keyframes inputHighlighter {

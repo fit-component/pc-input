@@ -1,6 +1,6 @@
 {
   "name": "fit-input",
-  "version": "3.0.3",
+  "version": "4.0.1",
   "description": "输入框",
   "main": "lib/index.js",
   "scripts": {
@@ -14,9 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "react": "^15.0.1",
-    "react-dom": "^15.0.1",
     "classnames": "^2.2.3",
-    "lodash": "^3.10.1",
-    "jquery": "^2.1.4"
+    "fit-transmit-transparently": "^3.1.5",
+    "validator": "^5.2.0",
+    "lodash": "^3.10.1"
   }
 }

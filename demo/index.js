@@ -1,2 +1,2 @@
 // @demo
-// basic:24 default:24 callback:24 disabled:24 flex:24 icon:24 textarea:24 clear:24
+// basic:24 highlight:24 default:24 disabled:24 no-label:24 center:24 callback:24 validate:24

@@ -1,10 +1,7 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import * as classNames from 'classnames'
-import * as _ from 'lodash'
-import * as $ from 'jquery'
 import * as classNames from 'classnames'
 import * as module from './module'
+import validator from './validate'
 import {others} from '../../../../common/transmit-transparently/src'
 import './index.scss'
 
@@ -14,6 +11,14 @@ export default class Input extends React.Component<module.PropsInterface, module
 
     constructor(props: any) {
         super(props)
+    }
+
+    handleInputChange(event: any) {
+        const validateResult = this.props.validateMiddleware(event.target.value, validator)
+        this.setState({
+            hasError: !validateResult.ok,
+            errorMessage: validateResult.errorMessage
+        })
     }
 
     render() {
@@ -28,12 +33,50 @@ export default class Input extends React.Component<module.PropsInterface, module
             Highlight = <span className="highlight"/>
         }
 
+        // 父级 div 的 style 与 input 的保持一致
+        // width height
+        const propsStyle: any = this.props['style'] || {}
+        let rootStyle: any = {
+            width: propsStyle.width,
+            height: propsStyle.height
+        }
+
+        const inputClasses = classNames({
+            'input': true,
+            'no-label': this.props.label === '',
+            [this.props.direction]: true
+        })
+
+        const labelClasses = classNames({
+            'label': true,
+            [this.props.direction]: true
+        })
+
+        const bottomBarClasses = classNames({
+            'bottom-bar': true,
+            'bottom-bar-error': this.state.hasError
+        })
+
+        // 错误文字提示
+        let ErrorLabel: React.ReactElement<any> = null
+        if (this.state.hasError) {
+            ErrorLabel = <span className="label-error">{this.state.errorMessage}</span>
+        }
+
         return (
-            <div {...others(new module.Props(), this.props)} className={classes}>
-                <input className="input"/>
+            <div className={classes}
+                 style={rootStyle}>
+                <input {...others(new module.Props(), this.props) }
+                    required={true}
+                    onChange={this.handleInputChange.bind(this) }
+                    className={inputClasses}/>
+                <div className="right-addon">
+                    {this.props.rightRender() }
+                </div>
+                {this.props.innerRender() }
                 {Highlight}
-                <span className="bottom-bar"/>
-                <label className="placeholder">{this.props.placeholder}</label>
+                <span className={bottomBarClasses}/>
+                <label className={labelClasses}>{this.props.label}{ErrorLabel}</label>
             </div>
         )
     }
