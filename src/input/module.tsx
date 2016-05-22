@@ -18,6 +18,11 @@ export interface PropsInterface {
     highlight?: boolean
 
     /**
+     * 获得焦点是否有高亮线
+     */
+    highlightLine?: boolean
+
+    /**
      * 右侧添加自定义元素
      */
     rightRender?: () => React.ReactElement<any>
@@ -43,6 +48,7 @@ export interface PropsInterface {
 export class Props implements PropsInterface {
     label = '请输入内容'
     highlight = false
+    highlightLine = true
     rightRender = (): any => {
         return null
     }
