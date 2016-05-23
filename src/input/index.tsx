@@ -1,6 +1,7 @@
 import * as React from 'react'
 import * as classNames from 'classnames'
 import * as module from './module'
+import * as _ from 'lodash'
 import {others} from '../../../../common/transmit-transparently/src'
 import validator from './validate'
 import './index.scss'
@@ -8,15 +9,18 @@ import './index.scss'
 /**
  * 抽出子元素的布局样式
  */
-const separateLayoutStyle = (style: any): any=> {
-    style = style || {}
+const separateLayoutStyle = (props: any): any=> {
+    const cloneStyle = _.cloneDeep(props['style']) || {}
     let separateStyle: any = {}
     const layoutStyles = ['width', 'margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft', 'padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft']
     layoutStyles.forEach((styleName: string)=> {
-        separateStyle[styleName] = _.cloneDeep(style[styleName])
-        style[styleName] = null
+        separateStyle[styleName] = _.cloneDeep(cloneStyle[styleName])
+        cloneStyle[styleName] = null
     })
-    return separateStyle
+    return {
+        separateStyle: separateStyle,
+        originStyle: cloneStyle
+    }
 }
 
 export default class Input extends React.Component<module.PropsInterface, module.StateInterface> {
@@ -50,7 +54,7 @@ export default class Input extends React.Component<module.PropsInterface, module
         }
 
         // input 的样式加在父级上
-        const rootStyle: any = separateLayoutStyle(this.props['style'])
+        const {separateStyle, originStyle} = separateLayoutStyle(this.props)
 
         const inputClasses = classNames({
             'input': true,
@@ -81,8 +85,9 @@ export default class Input extends React.Component<module.PropsInterface, module
 
         return (
             <div className={classes}
-                 style={rootStyle}>
-                <input {...others(new module.Props(), this.props) }
+                 style={separateStyle}>
+                <input {...others(new module.Props(), this.props, ['style']) }
+                    style={originStyle}
                     required={true}
                     onChange={this.handleInputChange.bind(this) }
                     className={inputClasses}/>

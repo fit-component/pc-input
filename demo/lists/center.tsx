@@ -4,7 +4,7 @@ import Input from '../../src'
 export default class Demo extends React.Component <any,any> {
     render() {
         return (
-            <Input direction="center"/>
+            <Input textAlign="center"/>
         )
     }
 }
