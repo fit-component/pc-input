@@ -55,12 +55,12 @@ export default class Input extends React.Component<module.PropsInterface, module
         const inputClasses = classNames({
             'input': true,
             'no-label': this.props.label === '',
-            [this.props.direction]: true
+            [this.props.textAlign]: true
         })
 
         const labelClasses = classNames({
             'label': true,
-            [this.props.direction]: true
+            [this.props.textAlign]: true
         })
 
         const bottomBarClasses = classNames({

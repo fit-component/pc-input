@@ -35,7 +35,7 @@ export interface PropsInterface {
     /**
      * 文字方向 居中或者靠左 left center
      */
-    direction?: string
+    textAlign?: string
 
     /**
      * 验证回调,可以自定义更多验证逻辑
@@ -55,7 +55,7 @@ export class Props implements PropsInterface {
     innerRender = (): any => {
         return null
     }
-    direction = 'left'
+    textAlign = 'left'
     validateMiddleware = () => {
         return {ok: true}
     }
