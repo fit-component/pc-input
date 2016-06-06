@@ -42,6 +42,21 @@ export interface PropsInterface {
      */
     validateMiddleware?: (value?: string, validator?: ExtendValidatorStatic) => validateMiddlewareReturnInterface
 
+    /**
+     * 是否禁用
+     */
+    disabled?: boolean
+
+    /**
+     * 值
+     */
+    value?: string|number
+
+    /**
+     * 默认值
+     */
+    defaultValue?: string|number
+
     [x: string]: any
 }
 
@@ -59,11 +74,17 @@ export class Props implements PropsInterface {
     validateMiddleware = () => {
         return {ok: true}
     }
+    disabled = false
 }
 
 export interface StateInterface {
     hasError?: boolean
     errorMessage?: string
+
+    /**
+     * 当前输入框数据
+     */
+    value?: number|string
 }
 
 export class State implements StateInterface {

@@ -31,13 +31,21 @@ export default class Input extends React.Component<module.PropsInterface, module
         super(props)
     }
 
+    componentWillMount() {
+        // 同步到自己的value
+        this.setState({
+            value: this.props.value || this.props.defaultValue
+        })
+    }
+
     handleInputChange(event: any) {
         this.props['onChange'] && this.props['onChange'](event)
 
         const validateResult = this.props.validateMiddleware(event.target.value, validator)
         this.setState({
             hasError: !validateResult.ok,
-            errorMessage: validateResult.errorMessage
+            errorMessage: validateResult.errorMessage,
+            value: event.target.value
         })
     }
 
@@ -64,7 +72,9 @@ export default class Input extends React.Component<module.PropsInterface, module
 
         const labelClasses = classNames({
             'label': true,
-            [this.props.textAlign]: true
+            [this.props.textAlign]: true,
+            'disabled': this.props.disabled,
+            'valid-disabled': this.props.disabled && this.state.value !== null && this.state.value !== undefined
         })
 
         const bottomBarClasses = classNames({
@@ -89,6 +99,7 @@ export default class Input extends React.Component<module.PropsInterface, module
                 <input {...others(new module.Props(), this.props, ['style']) }
                     style={originStyle}
                     required={true}
+                    disabled={this.props.disabled}
                     onChange={this.handleInputChange.bind(this) }
                     className={inputClasses}/>
                 <div className="right-addon">

@@ -26,6 +26,7 @@
     }
     &:disabled {
         border-bottom: 1px dotted #ccc;
+        color: #ccc;
     }
     @include placeholder('&:not(:focus)') {
         transition: opacify .3s;
@@ -55,6 +56,15 @@
         color: $error-color;
         margin-left: 10px;
     }
+    &.disabled {
+        color: #ccc;
+    }
+    &.valid-disabled {
+        top: -10px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #ccc;
+    }
 }
 
 .input:focus ~ .label, .input:valid ~ .label {
@@ -62,6 +72,9 @@
     font-size: 12px;
     font-weight: bold;
     color: $primary-color;
+    &.disabled {
+        color: #ccc;
+    }
 }
 
 // 内容合法,但没聚焦,label用淡黑色
