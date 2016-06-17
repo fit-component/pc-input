@@ -1,6 +1,6 @@
 {
   "name": "fit-input",
-  "version": "5.0.14",
+  "version": "5.0.15",
   "description": "输入框",
   "main": "lib/index.js",
   "scripts": {
@@ -12,12 +12,6 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "react": "^15.1.0",
-    "classnames": "^2.2.3",
-    "lodash": "^3.10.1",
-    "fit-transmit-transparently": "^3.1.16",
-    "validator": "^5.2.0"
-  },
+  "dependencies": {},
   "typings": "lib/index.d.ts"
 }
