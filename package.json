@@ -1,6 +1,6 @@
 {
   "name": "fit-input",
-  "version": "5.0.24",
+  "version": "5.0.25",
   "description": "输入框",
   "main": "lib/index.js",
   "scripts": {

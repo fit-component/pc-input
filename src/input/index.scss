@@ -18,6 +18,8 @@
     border-bottom: 1px solid #ccc;
     box-sizing: border-box;
     color: #333;
+    // 防止火狐给 invalid 元素增加 box-shadow 样式
+    box-shadow: none !important;
     &.center {
         text-align: center;
     }
